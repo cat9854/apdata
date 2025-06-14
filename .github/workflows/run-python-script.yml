@@ -1,0 +1,34 @@
+name: Run AP Data Cleaner
+
+on:
+  workflow_dispatch:  # Manual trigger
+  schedule:
+    - cron: '0 2 * * *'  # Daily at 2 AM UTC
+  repository_dispatch:
+    types: [power_automate_trigger]
+
+jobs:
+  clean-data:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pandas
+
+      - name: Run Python Script
+        run: |
+          python clean_ap_data.py
+
+      - name: Upload Cleaned File
+        uses: actions/upload-artifact@v3
+        with:
+          name: cleaned-ap-data
+          path: AP_Data_Cleaned.csv
