@@ -28,7 +28,7 @@ jobs:
           python clean_ap_data.py
 
       - name: Upload Cleaned File
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cleaned-ap-data
           path: AP_Data_Cleaned.csv
