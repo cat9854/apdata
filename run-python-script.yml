@@ -30,3 +30,7 @@ jobs:
         with:
           name: cleaned-ap-data
           path: AP_Data_Cleaned.csv
+
+on:
+  repository_dispatch:
+    types: [power_automate_trigger]
